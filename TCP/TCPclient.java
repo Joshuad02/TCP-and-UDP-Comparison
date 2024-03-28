@@ -1,7 +1,8 @@
 import java.io.*;
 import java.net.*;
 
-public class client {
+
+public class TCPclient {
     public static void main(String[] args) throws Exception {
         String command;
         String modififedcommand;
@@ -42,81 +43,35 @@ public class client {
 				break;
 			}
 			// This if needs to be fixed
-			else if("joke1.txt".equals(modififedcommand)) {
-				System.out.println("Receiving joke 1");
-				// New part: Receive the file size from the server
-				DataInputStream dataInFromServer = new DataInputStream(clientSocket.getInputStream());
-				long fileSize = dataInFromServer.readLong(); // Read the file size first
-				long bytesReceived = 0;
-				
-				// Prepare to receive the file
-				FileOutputStream fileOut = new FileOutputStream("joke1.txt");
-				byte[] buffer = new byte[8192];
-				
-				while(bytesReceived < fileSize) {
-					int count = dataInFromServer.read(buffer);
-					if (count > 0) {
-						fileOut.write(buffer, 0, count);
-						bytesReceived += count;
-					} else {
-						// End of file data stream
-						break;
-					}
-				}
-				System.out.println("Received from server: What kind of shoes does a spy wear? Sneakers");
-				System.out.println("Finished receiving file");
-				fileOut.close();
+			else if("meme1.png".equals(modififedcommand)) {
+				writeMeme("meme1.png", clientSocket);
 			}
-			else if("joke2.txt".equals(modififedcommand)) {
-				System.out.println("Receiving joke 2");
-				// New part: Receive the file size from the server
-				DataInputStream dataInFromServer = new DataInputStream(clientSocket.getInputStream());
-				long fileSize = dataInFromServer.readLong(); // Read the file size first
-				long bytesReceived = 0;
-
-				// Prepare to receive the file
-				FileOutputStream fileOut = new FileOutputStream("joke2.txt");
-				byte[] buffer = new byte[8192];
-
-				while(bytesReceived < fileSize) {
-					int count = dataInFromServer.read(buffer);
-					if (count > 0) {
-						fileOut.write(buffer, 0, count);
-						bytesReceived += count;
-					} else {
-						// End of file data stream
-						break;
-					}
-				}
-				System.out.println("Received from server: What does a house wear? Address");
-
-				System.out.println("Finished receiving file");
-				fileOut.close();
+			else if("meme2.png".equals(modififedcommand)) {
+				writeMeme("meme2.png", clientSocket);
 			}
-			else if("joke3.txt".equals(modififedcommand)) {
-				System.out.println("Receiving joke 3");
-				// New part: Receive the file size from the server
-				DataInputStream dataInFromServer = new DataInputStream(clientSocket.getInputStream());
-				long fileSize = dataInFromServer.readLong(); // Read the file size first
-				long bytesReceived = 0;
-
-				// Prepare to receive the file
-				FileOutputStream fileOut = new FileOutputStream("joke3.txt");
-				byte[] buffer = new byte[8192];
-
-				while(bytesReceived < fileSize) {
-					int count = dataInFromServer.read(buffer);
-					if (count > 0) {
-						fileOut.write(buffer, 0, count);
-						bytesReceived += count;
-					} else {
-						// End of file data stream
-						break;
-					}
-				}
-				System.out.println("Received from server: Why don't blind people skydive? Because it scares their dogs");
-				System.out.println("Finished receiving file");
-				fileOut.close();
+			else if("meme3.png".equals(modififedcommand)) {
+				writeMeme("meme3.png", clientSocket);
+			}
+			else if("meme4.png".equals(modififedcommand)) {
+				writeMeme("meme4.png", clientSocket);
+			}
+			else if("meme5.png".equals(modififedcommand)) {
+				writeMeme("meme5.png", clientSocket);
+			}
+			else if("meme6.png".equals(modififedcommand)) {
+				writeMeme("meme6.png", clientSocket);
+			}
+			else if("meme7.png".equals(modififedcommand)) {
+				writeMeme("meme7.png", clientSocket);
+			}
+			else if("meme8.png".equals(modififedcommand)) {
+				writeMeme("meme8.png", clientSocket);
+			}
+			else if("meme9.png".equals(modififedcommand)) {
+				writeMeme("meme9.png", clientSocket);
+			}
+			else if("meme10.png".equals(modififedcommand)) {
+				writeMeme("meme10.png", clientSocket);
 			}
 			else {
 				System.out.println(modififedcommand);
@@ -127,4 +82,28 @@ public class client {
 
 
     }
+	static void writeMeme(String meme, Socket clientSocket) throws Exception{
+		System.out.println("Receiving meme 1");
+			// New part: Receive the file size from the server
+			DataInputStream dataInFromServer = new DataInputStream(clientSocket.getInputStream());
+			long fileSize = dataInFromServer.readLong(); // Read the file size first
+			long bytesReceived = 0;
+				
+			// Prepare to receive the file
+			FileOutputStream fileOut = new FileOutputStream("meme1.png");
+			byte[] buffer = new byte[8192];
+				
+			while(bytesReceived < fileSize) {
+				int count = dataInFromServer.read(buffer);
+				if (count > 0) {
+					fileOut.write(buffer, 0, count);
+					bytesReceived += count;
+				} else {
+					// End of file data stream
+					break;
+				}
+			}
+			System.out.println("Finished receiving file");
+			fileOut.close();
+	}
 }
