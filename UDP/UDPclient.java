@@ -13,7 +13,7 @@ public class UDPclient {
         
         for(int i = 0; i < 10; i++) {
             Long start = System.currentTimeMillis();
-             InetAddress servAddress = InetAddress.getByName(args[0]);
+            InetAddress servAddress = InetAddress.getByName(args[0]);
             //InetAddress servAddress = InetAddress.getByName("localhost");
             long end = System.currentTimeMillis();
             long elapsed = end - start;
@@ -24,7 +24,7 @@ public class UDPclient {
         
         String command;
         
-        int port = Integer.parseInt(args[0]);
+        int port = Integer.parseInt(args[1]);
 
         DatagramSocket newSocket = new DatagramSocket(port);
         int count = 10;

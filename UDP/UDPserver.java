@@ -11,10 +11,10 @@ public class UDPserver {
         ArrayList<Long> memeAccessTime = new ArrayList<>(); 
 
 
-        InetAddress servAddress = InetAddress.getByName("localhost");
-        //InetAddress servAddress = InetAddress.getByName(args[0]);
-
-        int port = Integer.parseInt(args[0]);
+        //InetAddress servAddress = InetAddress.getByName("localhost");
+        InetAddress servAddress = InetAddress.getByName(args[0]);
+        
+        int port = Integer.parseInt(args[1]);
 
         List randoms = generateRandomList();
         for(int i = 0; i < randoms.size(); i++) {
