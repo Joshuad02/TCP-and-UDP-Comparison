@@ -1,5 +1,9 @@
 import java.io.*;
 import java.net.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Random;
 
 
 public class TCPclient {
@@ -42,6 +46,16 @@ public class TCPclient {
 				clientSocket.close();
 				break;
 			}
+			if("Go".equals(modififedcommand)) {
+				System.out.println("go");
+				List<Integer> numbers = generateRandomList();
+				for (int i = 0; i < numbers.size(); i++){
+					int curr = numbers.get(i);
+					System.out.println(curr);
+					writeMeme("meme" + numbers.get(i) + ".png", clientSocket);
+				}
+
+			}
 			// This if needs to be fixed
 			else if("meme1.png".equals(modififedcommand)) {
 				writeMeme("meme1.png", clientSocket);
@@ -82,15 +96,25 @@ public class TCPclient {
 
 
     }
+	public static List<Integer> generateRandomList() {
+		List<Integer> numbers = new ArrayList<>();
+
+		for (int i = 1; i <= 10; i++) {
+			numbers.add(i);
+		}
+		Collections.shuffle(numbers, new Random());
+		return numbers;
+	}
+
 	static void writeMeme(String meme, Socket clientSocket) throws Exception{
-		System.out.println("Receiving meme 1");
+		System.out.println("Receiving meme");
 			// New part: Receive the file size from the server
 			DataInputStream dataInFromServer = new DataInputStream(clientSocket.getInputStream());
 			long fileSize = dataInFromServer.readLong(); // Read the file size first
 			long bytesReceived = 0;
 				
 			// Prepare to receive the file
-			FileOutputStream fileOut = new FileOutputStream("meme1.png");
+			FileOutputStream fileOut = new FileOutputStream(meme);
 			byte[] buffer = new byte[8192];
 				
 			while(bytesReceived < fileSize) {

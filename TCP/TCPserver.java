@@ -71,6 +71,10 @@ public class TCPserver {
                     command = "meme10.png";
                     writeMeme(command, outToClient, connectionSocket);
                 }
+                else if("go".equals(command)){
+                    command = "Go";
+                    outToClient.writeBytes("Go\n");
+                }
                 else {
                     // Desired modifications to sentence
                     modififedSentence = "\"" + command + "\"" + " is an invalid input, try again\n";
