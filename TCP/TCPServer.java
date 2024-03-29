@@ -108,6 +108,7 @@ public class TCPServer {
     public static void writeMeme(String command, DataOutputStream outToClient, Socket connectionSocket, ArrayList<Long> memeAccessTime) throws Exception{
         System.out.println("Client requested: " + command + ", returning meme");
         outToClient.writeBytes(command + "\n");
+        TimeUnit.SECONDS.sleep(1);
         
         // MEASUREMENT PROBE
         long start = System.currentTimeMillis();
