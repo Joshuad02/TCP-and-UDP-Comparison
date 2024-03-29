@@ -5,7 +5,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
-public class UDPclient {
+public class UDPClient {
     public static void main(String[] args) throws Exception {
         ArrayList<Long> roundTripTimes = new ArrayList<>();
         ArrayList<Long> setupTime = new ArrayList<>();
