@@ -1,6 +1,7 @@
 import java.io.*;
 import java.net.*;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.concurrent.TimeUnit;
 
 public class TCPserver {
@@ -80,10 +81,29 @@ public class TCPserver {
                 }
 
             }
+            double min = Collections.min(memeAccessTime);
+            double mean = 0;
+            for(int i = 0; i < memeAccessTime.size(); i++) {
+                mean += memeAccessTime.get(i);
+            }
+            mean = mean / memeAccessTime.size();
+            double stddev = 0;
+            double max = Collections.max(memeAccessTime);
+            for(int i = 0; i < memeAccessTime.size(); i++) {
+                stddev += Math.pow(memeAccessTime.get(i) - mean, 2);
+            }
+            stddev = Math.sqrt(stddev / memeAccessTime.size());
+
+            System.out.println("Meme access time in server statistics");
+            System.out.println("Min: " + min);
+            System.out.println("Mean: " + mean);
+            System.out.println("Max: " + max);
+            System.out.println("Stddev: " + stddev);
+
             outToClient.close();
             inFromClient.close();
-            
         }
+
     }
     public static void writeMeme(String command, DataOutputStream outToClient, Socket connectionSocket, ArrayList<Long> memeAccessTime) throws Exception{
         long start = System.currentTimeMillis();

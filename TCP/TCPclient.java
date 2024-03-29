@@ -121,6 +121,26 @@ public class TCPclient {
 			}
 			i += 1;
 		}
+		double minD = Collections.min(setupTime);
+		double meanD = 0;
+		for(int j = 0; j < setupTime.size(); j++) {
+			meanD += setupTime.get(j);
+		}
+		meanD = meanD / setupTime.size();
+		double stddevD = 0;
+		double maxD = Collections.max(setupTime);
+		for(int j = 0; j < setupTime.size(); j++) {
+			stddevD += Math.pow(setupTime.get(j) - meanD, 2);
+		}
+		stddevD = Math.sqrt(stddevD / setupTime.size());
+
+
+		System.out.println(" ");
+		System.out.println("DNS look up time statistics");
+		System.out.println("Min: " + minD);
+		System.out.println("Mean: " + meanD);
+		System.out.println("Max: " + maxD);
+		System.out.println("Stddev: " + stddevD);
 		command = "bye";
 		outToServer.writeBytes(command + "\n");
 
