@@ -5,7 +5,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
-public class UDPserver {
+public class UDPServer {
     public static void main(String[] args) throws Exception {
         DatagramPacket endPacket;
         ArrayList<Long> memeAccessTime = new ArrayList<>(); 
