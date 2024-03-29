@@ -19,6 +19,7 @@ public class TCPclient {
 		Socket clientSocket = new Socket(args[0], port);
         
 		// Create input stream
+			
 		BufferedReader inFromUser = new BufferedReader(new InputStreamReader(System.in));
 			
 		// Create output stream that is attached to the socket
@@ -26,12 +27,44 @@ public class TCPclient {
 
 		// Create input stream attached to socket
 		BufferedReader inFromServer = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-		
+		List randoms = generateRandomList();
+		int i = 0;
 		System.out.println("Connected");
 		hello = inFromServer.readLine();
 		System.out.println(hello);
-		while(true) {
-			command = inFromUser.readLine();
+		while(i < randoms.size()) {
+			command = "";
+			if(randoms.get(i).equals(1)) {
+                command = "Meme 1";
+            }
+            if(randoms.get(i).equals(2)) {
+                command = "Meme 2";
+            }
+            if(randoms.get(i).equals(3)) {
+                command = "Meme 3";
+            }
+            if(randoms.get(i).equals(4)) {
+                command = "Meme 4";
+            }
+            if(randoms.get(i).equals(5)) {
+                command = "Meme 5";
+            }
+            if(randoms.get(i).equals(6)) {
+                command = "Meme 6";
+            }
+            if(randoms.get(i).equals(7)) {
+                command = "Meme 7";
+            }
+            if(randoms.get(i).equals(8)) {
+                command = "Meme 8";
+            }
+            if(randoms.get(i).equals(9)) {
+                command = "Meme 9";
+            }
+            if(randoms.get(i).equals(10)) {
+                command = "Meme 10";
+            }
+			// command = inFromUser.readLine();
 
 			// Send line to server
 			outToServer.writeBytes(command + "\n");
@@ -45,7 +78,8 @@ public class TCPclient {
 				clientSocket.close();
 				break;
 			}
-			else if ("meme1.png".equals(modififedcommand)){
+			// This if needs to be fixed
+			else if("meme1.png".equals(modififedcommand)) {
 				writeMeme("meme1.png", clientSocket);
 			}
 			else if("meme2.png".equals(modififedcommand)) {
@@ -75,24 +109,26 @@ public class TCPclient {
 			else if("meme10.png".equals(modififedcommand)) {
 				writeMeme("meme10.png", clientSocket);
 			}
-			// This if needs to be fixed
 			else {
 				System.out.println(modififedcommand);
 			}
+			i += 1;
 		}
+		command = "bye";
+		outToServer.writeBytes(command + "\n");
+
     }
 	static void writeMeme(String meme, Socket clientSocket) throws Exception{
-			System.out.println("Receiving " + meme);
-
+		System.out.println("Receiving " + meme);
 			// New part: Receive the file size from the server
 			DataInputStream dataInFromServer = new DataInputStream(clientSocket.getInputStream());
 			long fileSize = dataInFromServer.readLong(); // Read the file size first
 			long bytesReceived = 0;
-
+				
 			// Prepare to receive the file
 			FileOutputStream fileOut = new FileOutputStream(meme);
 			byte[] buffer = new byte[8192];
-
+				
 			while(bytesReceived < fileSize) {
 				int count = dataInFromServer.read(buffer);
 				if (count > 0) {
@@ -105,5 +141,14 @@ public class TCPclient {
 			}
 			System.out.println("Finished receiving file");
 			fileOut.close();
+	}
+	public static List<Integer> generateRandomList() {
+		List<Integer> numbers = new ArrayList<>();
+
+		for (int i = 1; i <= 10; i++) {
+			numbers.add(i);
+		}
+		Collections.shuffle(numbers, new Random());
+		return numbers;
 	}
 }
