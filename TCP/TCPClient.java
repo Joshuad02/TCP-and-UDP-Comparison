@@ -14,6 +14,7 @@ public class TCPClient {
 		ArrayList<Long> roundTripTimes = new ArrayList<>();
 		ArrayList<Long> setupTime = new ArrayList<>();
 		// Establish port
+		// MEASUREMENT PROBE
 		Long start = System.currentTimeMillis();
 		int port = Integer.parseInt(args[1]);
 
@@ -30,6 +31,7 @@ public class TCPClient {
 
 		// Create input stream attached to socket
 		BufferedReader inFromServer = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+		// MEASUREMENT PROBE
 		long end = System.currentTimeMillis();
 		long elapsed = end - start;
 		setupTime.add(elapsed);
@@ -146,6 +148,7 @@ public class TCPClient {
 
     }
 	static void writeMeme(String meme, Socket clientSocket, ArrayList<Long> roundTripTimes) throws Exception{
+		// MEASUREMENT PROBE
 		long start = System.currentTimeMillis();
 		System.out.println("Receiving " + meme);
 			// New part: Receive the file size from the server
@@ -169,6 +172,7 @@ public class TCPClient {
 			}
 			System.out.println("Finished receiving file");
 			fileOut.close();
+		// MEASUREMENT PROBE
 		long end = System.currentTimeMillis();
 		long elapsed = end - start;
 		roundTripTimes.add(elapsed);

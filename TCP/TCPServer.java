@@ -106,11 +106,13 @@ public class TCPServer {
 
     }
     public static void writeMeme(String command, DataOutputStream outToClient, Socket connectionSocket, ArrayList<Long> memeAccessTime) throws Exception{
-        long start = System.currentTimeMillis();
         System.out.println("Client requested: " + command + ", returning meme");
         outToClient.writeBytes(command + "\n");
         TimeUnit.SECONDS.sleep(1);
-    
+        
+        // MEASUREMENT PROBE
+        long start = System.currentTimeMillis();
+        
         File file = new File("../memes/" + command);
         long length = file.length();
         outToClient.writeLong(length);
@@ -122,6 +124,7 @@ public class TCPServer {
         while((count = in.read(bytes)) > 0) {
             out.write(bytes, 0, count);
         }
+        // MEASUREMENT PROBE
         long end = System.currentTimeMillis();
         long elapsedTime = end - start;
         memeAccessTime.add(elapsedTime);
