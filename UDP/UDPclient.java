@@ -12,15 +12,16 @@ public class UDPclient {
 
         
         for(int i = 0; i < 10; i++) {
+            // MEASUREMENT PROBE
             Long start = System.currentTimeMillis();
             InetAddress servAddress = InetAddress.getByName(args[0]);
             //InetAddress servAddress = InetAddress.getByName("localhost");
+
+            // MEASUREMENT PROBE
             long end = System.currentTimeMillis();
             long elapsed = end - start;
             setupTime.add(elapsed);
         }
-        //InetAddress servAddress = InetAddress.getByName("localhost");
-
         
         String command;
         
@@ -33,7 +34,7 @@ public class UDPclient {
             DatagramPacket numberPacket = new DatagramPacket(number, number.length);
             newSocket.receive(numberPacket);
             String num = new String(numberPacket.getData(), 0, numberPacket.getLength());
-            System.out.println(" ");
+            System.out.println("");
             readMeme(num, newSocket, roundTripTimes);
             count -= 1;
         }
@@ -81,6 +82,7 @@ public class UDPclient {
     }
     static void readMeme(String meme, DatagramSocket newSocket, ArrayList<Long> roundTripTimes) throws Exception{
         ByteArrayOutputStream byteArrayStream = new ByteArrayOutputStream();
+        // MEASUREMENT PROBE
         long start = System.currentTimeMillis();
         while(true) {
             byte[] receiveData = new byte[512];
@@ -93,6 +95,7 @@ public class UDPclient {
             }
             byteArrayStream.write(receivePacket.getData(), 0, receivePacket.getLength());
         }
+        // MEASUREMENT PROBE
         long end = System.currentTimeMillis();
         long elapsed = end - start;
         roundTripTimes.add(elapsed);

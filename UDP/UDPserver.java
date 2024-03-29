@@ -11,7 +11,7 @@ public class UDPserver {
         ArrayList<Long> memeAccessTime = new ArrayList<>(); 
 
 
-        //InetAddress servAddress = InetAddress.getByName("localhost");
+       // InetAddress servAddress = InetAddress.getByName("localhost");
         InetAddress servAddress = InetAddress.getByName(args[0]);
         
         int port = Integer.parseInt(args[1]);
@@ -69,6 +69,7 @@ public class UDPserver {
         System.out.println("Stddev: " + stddev);
     }
     public static void writeMeme(String memeNumber, InetAddress servAddress, int port, ArrayList<Long> memeAccessTime) throws Exception{
+        // MEASUREMENT PROBE
         long start = System.currentTimeMillis();
         File file = new File("../memes/meme" + memeNumber + ".png");
 
@@ -86,6 +87,7 @@ public class UDPserver {
             DatagramPacket sendPacket = new DatagramPacket(buffer, bytesRead, servAddress, port);
             newSocket.send(sendPacket);
         }
+        // MEASUREMENT PROBE
         long end = System.currentTimeMillis();
         long elapsedTime = end - start;
         memeAccessTime.add(elapsedTime);
