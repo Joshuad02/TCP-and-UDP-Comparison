@@ -1,11 +1,13 @@
 import java.io.*;
 import java.net.*;
+import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
 public class TCPserver {
     public static void main(String[] args) throws Exception {
         String command;
         String modififedSentence;
+        ArrayList<Long> memeAccessTime = new ArrayList<>();
 
         // Establish port
         int port = Integer.parseInt(args[0]);
@@ -33,43 +35,43 @@ public class TCPserver {
                 }
                 else if("Meme 1".equals(command)) {
                     command = "meme1.png";
-                    writeMeme(command, outToClient, connectionSocket);
+                    writeMeme(command, outToClient, connectionSocket, memeAccessTime);
                 }
                 else if("Meme 2".equals(command)) {
                     command = "meme2.png";
-                    writeMeme(command, outToClient, connectionSocket);
+                    writeMeme(command, outToClient, connectionSocket, memeAccessTime);
                 }
                 else if("Meme 3".equals(command)) {
                     command = "meme3.png";
-                    writeMeme(command, outToClient, connectionSocket);
+                    writeMeme(command, outToClient, connectionSocket, memeAccessTime);
                 }
                 else if("Meme 4".equals(command)) {
                     command = "meme4.png";
-                    writeMeme(command, outToClient, connectionSocket);
+                    writeMeme(command, outToClient, connectionSocket, memeAccessTime);
                 }
                 else if("Meme 5".equals(command)) {
                     command = "meme5.png";
-                    writeMeme(command, outToClient, connectionSocket);
+                    writeMeme(command, outToClient, connectionSocket, memeAccessTime);
                 }
                 else if("Meme 6".equals(command)) {
                     command = "meme6.png";
-                    writeMeme(command, outToClient, connectionSocket);
+                    writeMeme(command, outToClient, connectionSocket, memeAccessTime);
                 }
                 else if("Meme 7".equals(command)) {
                     command = "meme7.png";
-                    writeMeme(command, outToClient, connectionSocket);
+                    writeMeme(command, outToClient, connectionSocket, memeAccessTime);
                 }
                 else if("Meme 8".equals(command)) {
                     command = "meme8.png";
-                    writeMeme(command, outToClient, connectionSocket);
+                    writeMeme(command, outToClient, connectionSocket, memeAccessTime);
                 }
                 else if("Meme 9".equals(command)) {
                     command = "meme9.png";
-                    writeMeme(command, outToClient, connectionSocket);
+                    writeMeme(command, outToClient, connectionSocket, memeAccessTime);
                 }
                 else if("Meme 10".equals(command)) {
                     command = "meme10.png";
-                    writeMeme(command, outToClient, connectionSocket);
+                    writeMeme(command, outToClient, connectionSocket, memeAccessTime);
                 }
                 else {
                     // Desired modifications to sentence
@@ -83,7 +85,8 @@ public class TCPserver {
             
         }
     }
-    static void writeMeme(String command, DataOutputStream outToClient, Socket connectionSocket) throws Exception{
+    public static void writeMeme(String command, DataOutputStream outToClient, Socket connectionSocket, ArrayList<Long> memeAccessTime) throws Exception{
+        long start = System.currentTimeMillis();
         System.out.println("Client requested: " + command + ", returning meme");
         outToClient.writeBytes(command + "\n");
         TimeUnit.SECONDS.sleep(1);
@@ -99,7 +102,9 @@ public class TCPserver {
         while((count = in.read(bytes)) > 0) {
             out.write(bytes, 0, count);
         }
-
+        long end = System.currentTimeMillis();
+        long elapsedTime = end - start;
+        memeAccessTime.add(elapsedTime);
         in.close();
     }
 };

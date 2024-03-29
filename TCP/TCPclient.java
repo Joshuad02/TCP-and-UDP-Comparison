@@ -11,7 +11,10 @@ public class TCPclient {
         String command;
         String modififedcommand;
 		String hello;
+		ArrayList<Long> roundTripTimes = new ArrayList<>();
+		ArrayList<Long> setupTime = new ArrayList<>();
 		// Establish port
+		Long start = System.currentTimeMillis();
 		int port = Integer.parseInt(args[1]);
 
 		// Create client socket and connect to server
@@ -27,6 +30,10 @@ public class TCPclient {
 
 		// Create input stream attached to socket
 		BufferedReader inFromServer = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+		long end = System.currentTimeMillis();
+		long elapsed = end - start;
+		setupTime.add(elapsed);
+
 		List randoms = generateRandomList();
 		int i = 0;
 		System.out.println("Connected");
@@ -80,34 +87,34 @@ public class TCPclient {
 			}
 			// This if needs to be fixed
 			else if("meme1.png".equals(modififedcommand)) {
-				writeMeme("meme1.png", clientSocket);
+				writeMeme("meme1.png", clientSocket, roundTripTimes);
 			}
 			else if("meme2.png".equals(modififedcommand)) {
-				writeMeme("meme2.png", clientSocket);
+				writeMeme("meme2.png", clientSocket, roundTripTimes);
 			}
 			else if("meme3.png".equals(modififedcommand)) {
-				writeMeme("meme3.png", clientSocket);
+				writeMeme("meme3.png", clientSocket, roundTripTimes);
 			}
 			else if("meme4.png".equals(modififedcommand)) {
-				writeMeme("meme4.png", clientSocket);
+				writeMeme("meme4.png", clientSocket, roundTripTimes);
 			}
 			else if("meme5.png".equals(modififedcommand)) {
-				writeMeme("meme5.png", clientSocket);
+				writeMeme("meme5.png", clientSocket, roundTripTimes);
 			}
 			else if("meme6.png".equals(modififedcommand)) {
-				writeMeme("meme6.png", clientSocket);
+				writeMeme("meme6.png", clientSocket, roundTripTimes);
 			}
 			else if("meme7.png".equals(modififedcommand)) {
-				writeMeme("meme7.png", clientSocket);
+				writeMeme("meme7.png", clientSocket, roundTripTimes);
 			}
 			else if("meme8.png".equals(modififedcommand)) {
-				writeMeme("meme8.png", clientSocket);
+				writeMeme("meme8.png", clientSocket, roundTripTimes);
 			}
 			else if("meme9.png".equals(modififedcommand)) {
-				writeMeme("meme9.png", clientSocket);
+				writeMeme("meme9.png", clientSocket, roundTripTimes);
 			}
 			else if("meme10.png".equals(modififedcommand)) {
-				writeMeme("meme10.png", clientSocket);
+				writeMeme("meme10.png", clientSocket, roundTripTimes);
 			}
 			else {
 				System.out.println(modififedcommand);
@@ -118,7 +125,8 @@ public class TCPclient {
 		outToServer.writeBytes(command + "\n");
 
     }
-	static void writeMeme(String meme, Socket clientSocket) throws Exception{
+	static void writeMeme(String meme, Socket clientSocket, ArrayList<Long> roundTripTimes) throws Exception{
+		long start = System.currentTimeMillis();
 		System.out.println("Receiving " + meme);
 			// New part: Receive the file size from the server
 			DataInputStream dataInFromServer = new DataInputStream(clientSocket.getInputStream());
@@ -141,6 +149,9 @@ public class TCPclient {
 			}
 			System.out.println("Finished receiving file");
 			fileOut.close();
+		long end = System.currentTimeMillis();
+		long elapsed = end - start;
+		roundTripTimes.add(elapsed);
 	}
 	public static List<Integer> generateRandomList() {
 		List<Integer> numbers = new ArrayList<>();
