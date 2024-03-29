@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Random;
 
 
-public class TCPclient {
+public class TCPClient {
     public static void main(String[] args) throws Exception {
         String command;
         String modififedcommand;

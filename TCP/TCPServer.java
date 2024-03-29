@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.concurrent.TimeUnit;
 
-public class TCPserver {
+public class TCPServer {
     public static void main(String[] args) throws Exception {
         String command;
         String modififedSentence;
