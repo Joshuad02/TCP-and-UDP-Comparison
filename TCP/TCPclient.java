@@ -51,42 +51,42 @@ public class TCPclient {
 				List<Integer> numbers = generateRandomList();
 				for (int i = 0; i < numbers.size(); i++){
 					int curr = numbers.get(i);
-					System.out.println(curr);
-					writeMeme("meme" + numbers.get(i) + ".png", clientSocket);
+					System.out.println("meme" + numbers.get(i)+ ".png");
+					if (curr == 1) {
+						writeMeme("meme1.png", clientSocket);
+					}
+					else if(curr == 2) {
+						writeMeme("meme2.png", clientSocket);
+					}
+					else if(curr == 3) {
+						writeMeme("meme3.png", clientSocket);
+					}
+					else if(curr == 4) {
+						writeMeme("meme4.png", clientSocket);
+					}
+					else if(curr == 5) {
+						writeMeme("meme5.png", clientSocket);
+					}
+					else if(curr == 6) {
+						writeMeme("meme6.png", clientSocket);
+					}
+					else if(curr == 7) {
+						writeMeme("meme7.png", clientSocket);
+					}
+					else if(curr == 8) {
+						writeMeme("meme8.png", clientSocket);
+					}
+					else if(curr == 9) {
+						writeMeme("meme9.png", clientSocket);
+					}
+					else if(curr == 10) {
+						writeMeme("meme10.png", clientSocket);
+					}
 				}
 
 			}
 			// This if needs to be fixed
-			else if("meme1.png".equals(modififedcommand)) {
-				writeMeme("meme1.png", clientSocket);
-			}
-			else if("meme2.png".equals(modififedcommand)) {
-				writeMeme("meme2.png", clientSocket);
-			}
-			else if("meme3.png".equals(modififedcommand)) {
-				writeMeme("meme3.png", clientSocket);
-			}
-			else if("meme4.png".equals(modififedcommand)) {
-				writeMeme("meme4.png", clientSocket);
-			}
-			else if("meme5.png".equals(modififedcommand)) {
-				writeMeme("meme5.png", clientSocket);
-			}
-			else if("meme6.png".equals(modififedcommand)) {
-				writeMeme("meme6.png", clientSocket);
-			}
-			else if("meme7.png".equals(modififedcommand)) {
-				writeMeme("meme7.png", clientSocket);
-			}
-			else if("meme8.png".equals(modififedcommand)) {
-				writeMeme("meme8.png", clientSocket);
-			}
-			else if("meme9.png".equals(modififedcommand)) {
-				writeMeme("meme9.png", clientSocket);
-			}
-			else if("meme10.png".equals(modififedcommand)) {
-				writeMeme("meme10.png", clientSocket);
-			}
+
 			else {
 				System.out.println(modififedcommand);
 			}
@@ -112,11 +112,11 @@ public class TCPclient {
 			DataInputStream dataInFromServer = new DataInputStream(clientSocket.getInputStream());
 			long fileSize = dataInFromServer.readLong(); // Read the file size first
 			long bytesReceived = 0;
-				
+
 			// Prepare to receive the file
 			FileOutputStream fileOut = new FileOutputStream(meme);
 			byte[] buffer = new byte[8192];
-				
+
 			while(bytesReceived < fileSize) {
 				int count = dataInFromServer.read(buffer);
 				if (count > 0) {
